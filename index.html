@@ -1111,8 +1111,8 @@
         }
         
         .payment-logo {
-            height: 24px; /* Uniform small size */
-            width: auto;
+            height: 50px; /* Uniform small size */
+            width: 75px;
             object-fit: contain;
             filter: brightness(0) invert(1);
             opacity: 0.9;
@@ -1508,7 +1508,7 @@
                 <!-- Explore Button Moved Here -->
                 <a href="#courses" class="header-explore-btn">
                     <i class="far fa-compass" style="font-size: 1.1rem;"></i> 
-                    Explore
+                    Explore Courses
                 </a>
 
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1804,7 +1804,7 @@
             <div class="inquiry-form-container">
                 <div class="form-header">
                     <h2>Book a Free Demo Session</h2>
-                    <p class="form-subtitle">Share your details and we'll contact you personally on WhatsApp.</p>
+                    <p class="form-subtitle">Share your details and we'll contact you personally.</p>
                 </div>
                 
                 <div class="form-content">
@@ -1916,10 +1916,11 @@
                             <i class="fab fa-cc-visa payment-icon" title="Visa"></i>
                             <i class="fab fa-cc-mastercard payment-icon" title="Mastercard"></i>
                             <i class="fab fa-cc-paypal payment-icon" title="PayPal"></i>
-                            
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rupay-Logo.png/320px-Rupay-Logo.png" alt="RuPay" class="payment-logo" title="RuPay">
                             <i class="fas fa-university payment-icon" title="Net Banking"></i>
+                            <span class="payment-label">
+                                
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/320px-UPI-Logo-vector.svg.png" alt="UPI" class="payment-logo" title="UPI">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rupay-Logo.png/320px-Rupay-Logo.png" alt="RuPay" class="payment-logo" title="RuPay">
                         </div>
                     </div>
                 </div>
@@ -2352,9 +2353,7 @@
                     
                     <!-- Contact Info Section -->
                     <div style="background: var(--bg-section); padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border: 1px solid var(--border-color);">
-                        <h4 style="margin-bottom: 1rem; color: var(--text-heading);"><i class="fas fa-gift" style="color: var(--primary-blue);"></i> Free Demo Session Available</h4>
-                        <p style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-phone-alt" style="color: var(--text-muted);"></i> +91 9609738421</p>
-                        <p style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-envelope" style="color: var(--text-muted);"></i> victorchakraborty4@gmail.com</p>
+                        <center><h4 style="margin-bottom: 1rem; color: var(--text-heading);"><i class="fas fa-gift" style="color: var(--primary-blue);"></i> Free Demo Session Available</h4></center>
                         <a href="#inquiry-form" onclick="closeModal()" class="btn btn-primary" style="width: 100%; justify-content: center;">Book Free Demo Now</a>
                     </div>
                 </div>
@@ -2469,7 +2468,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert("Thank you! We have received your details and will contact you on WhatsApp shortly.");
+                        alert("Thank you! We have received your details and will contact you shortly.");
                         this.reset();
                     } else {
                         alert("Something went wrong. Please try again later.");
