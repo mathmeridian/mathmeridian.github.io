@@ -111,6 +111,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
@@ -190,6 +194,13 @@
             letter-spacing: 0.05em;
         }
 
+        /* Controls Area */
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         /* Theme Toggle Button */
         .theme-toggle {
             background: transparent;
@@ -203,7 +214,6 @@
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
-            margin-left: 1rem;
             font-size: 1.2rem;
         }
 
@@ -212,82 +222,26 @@
             transform: rotate(15deg);
         }
 
-        /* Desktop Navigation */
-        .desktop-nav {
-            display: flex;
-            align-items: center;
-        }
-
-        .explore-container {
-            position: relative;
-        }
-
-        .explore-btn {
-            background: var(--text-heading); /* Dynamic Color */
-            color: var(--bg-body); /* Dynamic Contrast */
+        /* Header Explore Button - Enforced Blue Accent */
+        .header-explore-btn {
+            background: var(--palette-blue-600) !important; /* Enforced Blue */
+            color: #ffffff !important; /* Enforced White */
             padding: 0.6rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
-            border: none;
-            cursor: pointer;
+            text-decoration: none;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 0.95rem;
+            border: none;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
         }
 
-        [data-theme="dark"] .explore-btn {
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .explore-btn:hover {
-            opacity: 0.9;
+        .header-explore-btn:hover {
+            background-color: #1d4ed8 !important;
             transform: translateY(-1px);
-        }
-
-        .explore-menu {
-            position: absolute;
-            top: 120%;
-            right: 0;
-            background: var(--bg-surface);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-premium);
-            padding: 1rem 0;
-            min-width: 220px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: var(--transition);
-            z-index: 1001;
-            border: 1px solid var(--border-color);
-        }
-
-        .explore-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .explore-menu ul {
-            list-style: none;
-        }
-
-        .explore-menu a {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            font-size: 0.95rem;
-        }
-
-        .explore-menu a:hover {
-            background-color: var(--bg-section);
-            color: var(--accent-blue);
-            padding-left: 1.75rem;
         }
 
         /* Mobile Navigation */
@@ -299,7 +253,6 @@
             color: var(--text-heading);
             cursor: pointer;
             z-index: 1001;
-            margin-left: 10px;
         }
 
         .mobile-nav {
@@ -397,28 +350,35 @@
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
         }
 
-        .btn-accent {
-            background-color: var(--accent-blue);
+        /* Updated Explore Button in Hero - Blue Accent */
+        .btn-explore-hero {
+            background-color: var(--palette-blue-600);
             color: white;
             box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+            border: none;
         }
 
-        .btn-accent:hover {
+        .btn-explore-hero:hover {
             background-color: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.23);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            color: white;
         }
-
+        
         .btn-secondary {
             background-color: rgba(255,255,255,0.1);
-            color: var(--white);
-            border: 1px solid rgba(255,255,255,0.4);
+            color: var(--text-heading);
+            border: 1px solid var(--border-color);
             backdrop-filter: blur(4px);
+        }
+        
+        [data-theme="dark"] .btn-secondary {
+            color: white;
+            background-color: rgba(255,255,255,0.05);
         }
 
         .btn-secondary:hover {
-            background-color: var(--white);
-            color: var(--palette-white);
+            background-color: var(--bg-section);
             transform: translateY(-2px);
         }
 
@@ -476,41 +436,6 @@
             justify-content: center;
         }
 
-        .read-more {
-            color: #4ade80;
-            font-weight: 600;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: var(--transition);
-            cursor: pointer;
-            margin-top: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .read-more:hover {
-            gap: 8px;
-            color: white;
-        }
-
-        .hidden-text {
-            display: none;
-            margin-top: 2rem;
-            padding: 2rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            border-left: 4px solid var(--secondary-green);
-            backdrop-filter: blur(10px);
-            text-align: left;
-        }
-        
-        .hidden-text.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
         /* Mission Section */
         .mission-section {
             padding: 5rem 0;
@@ -522,7 +447,16 @@
         .mission-section h2 {
             font-size: 2.5rem;
             color: var(--text-heading);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: center;
         }
 
         .mission-section p {
@@ -540,7 +474,7 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .section-title h2 {
@@ -548,6 +482,7 @@
             color: var(--text-heading);
             position: relative;
             display: inline-block;
+            margin-bottom: 1rem;
         }
 
         /* What We Offer Section */
@@ -561,7 +496,7 @@
             background: var(--bg-surface);
             padding: 2.5rem;
             border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--card-border);
             transition: var(--transition);
             display: flex;
@@ -607,7 +542,7 @@
             background: var(--bg-surface);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--card-border);
             transition: var(--transition);
             display: flex;
@@ -640,21 +575,6 @@
         
         .learning-card:hover .card-image-container img {
             transform: scale(1.05);
-        }
-        
-        .image-placeholder {
-            font-size: 3rem;
-            color: var(--icon-color);
-            opacity: 0.7;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .image-placeholder span {
-            font-size: 0.9rem;
-            font-weight: 500;
         }
 
         .card-content {
@@ -695,12 +615,26 @@
             gap: 2rem;
             padding: 1rem 0.5rem 2rem;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
             scroll-behavior: smooth;
         }
         
+        /* Updated scrollbar to be visible, matching courses */
         .reviews-scroll-area::-webkit-scrollbar {
-            display: none;
+            height: 8px;
+        }
+        
+        .reviews-scroll-area::-webkit-scrollbar-track {
+            background: var(--bg-section);
+            border-radius: 4px;
+        }
+        
+        .reviews-scroll-area::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        
+        .reviews-scroll-area::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
         }
         
         /* Navigation Buttons for Carousel */
@@ -741,7 +675,7 @@
             text-align: center;
             background: var(--bg-surface);
             border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--card-border);
             transition: var(--transition);
         }
@@ -857,7 +791,7 @@
             background: var(--bg-surface);
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--card-shadow);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--card-border);
             transition: var(--transition);
             display: flex;
@@ -921,8 +855,15 @@
             background: #0f172a; /* Slate 900 */
         }
         
-        .global-curriculum-section .section-title h2 { color: white; }
-        .global-curriculum-section .section-subtitle { color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 3rem; }
+        .global-curriculum-section .section-title h2 { 
+            color: white; 
+            margin-bottom: 0.5rem; /* Reduced Gap */
+        }
+        .global-curriculum-section .section-subtitle { 
+            color: rgba(255,255,255,0.8); 
+            text-align: center; 
+            margin-bottom: 3rem; 
+        }
 
         .curriculum-grid {
             display: grid;
@@ -987,6 +928,12 @@
             height: 100%;
             object-fit: cover;
         }
+        
+        /* Bigger Teacher Name */
+        .teacher-info h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
 
         /* Inquiry Form */
         .inquiry-form-section { background-color: var(--bg-section); }
@@ -1025,6 +972,11 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--text-heading);
+        }
+
+        .required-star {
+            color: #ef4444; /* Red */
+            margin-left: 3px;
         }
 
         .form-control {
@@ -1092,6 +1044,13 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
+
+        .form-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
         
         /* Footer */
         footer {
@@ -1131,20 +1090,30 @@
             font-size: 0.9rem;
         }
 
+        /* Updated Payment Styling - Uniform Size */
+        .payment-section-footer {
+            margin-top: 1.5rem;
+        }
+        
+        .payment-label {
+            color: var(--footer-text);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
         .payment-methods {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.25rem;
-            margin-top: 1.5rem;
+            gap: 15px;
             color: var(--footer-text);
         }
         
-        /* Updated Payment Styling */
         .payment-logo {
-            height: 24px;
+            height: 24px; /* Uniform small size */
             width: auto;
-            /* Make images white and monochrome to match font icons */
+            object-fit: contain;
             filter: brightness(0) invert(1);
             opacity: 0.9;
             transition: opacity 0.3s;
@@ -1153,27 +1122,8 @@
         .payment-logo:hover { opacity: 1; }
         
         .payment-icon {
-            font-size: 24px;
+            font-size: 24px; /* Uniform small size */
             opacity: 0.9;
-        }
-
-        .request-payment-btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--secondary-green);
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: var(--transition);
-            box-shadow: var(--shadow-md);
-        }
-
-        .request-payment-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            background-color: var(--primary-green);
         }
 
         /* Modal */
@@ -1218,20 +1168,34 @@
             color: white;
         }
         
+        /* Updated Close Modal Button (Accent Color) */
         .close-modal {
             position: absolute;
             top: 1.5rem;
             right: 1.5rem;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: white; /* Always white on dark header */
-            width: 32px;
-            height: 32px;
+            background: var(--bg-surface);
+            border: 2px solid var(--bg-surface);
+            color: var(--text-heading); 
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+        }
+        
+        [data-theme="dark"] .close-modal {
+            color: var(--accent-blue);
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
         }
         
         .modal-body { padding: 2rem; }
@@ -1239,25 +1203,17 @@
         .modal-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 2rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
         
-        .modal-logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--text-heading), var(--accent-blue));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
+        .modal-logo img {
+            height: 40px;
+            width: auto;
         }
         
-        .modal-logo-icon::after { content: "π∑"; font-weight: 700; }
         .modal-logo-text { font-weight: 700; color: var(--text-heading); font-size: 1.2rem; }
 
         /* Other Inputs */
@@ -1515,7 +1471,7 @@
         /* Responsive */
         @media (max-width: 992px) {
             .teacher-profile { grid-template-columns: 1fr; text-align: center; }
-            .desktop-nav { display: none; }
+            .header-explore-btn { display: none; } /* Hide direct link on mobile, usage in menu */
             .mobile-menu-btn { display: block; }
         }
         
@@ -1536,39 +1492,25 @@
     <header id="mainHeader">
         <div class="container header-container">
             <a href="#home" class="logo">
-                <!-- Using Placeholder Image as requested -->
-                <img src="newlogo.png" alt="KSG Logo" class="logo-image">
+                <!-- Swappable Logo -->
+                <img id="siteLogo" src="newlogo-light.png" alt="Math Meridian Logo" class="logo-image">
                 <div class="logo-text">
                     <div class="logo-main">Math Meridian</div>
                     <div class="logo-tagline">Where Knowledge Meets Excellence</div>
                 </div>
             </a>
             
-            <nav class="desktop-nav">
-                <div class="explore-container">
-                    <button class="explore-btn" id="exploreBtn">
-                        <i class="far fa-compass" style="margin-right: 8px; font-size: 1.1rem;"></i> 
-                        Explore
-                    </button>
-                    <div class="explore-menu" id="exploreMenu">
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#learning">Learning Experience</a></li>
-                            <li><a href="#reviews">Reviews</a></li>
-                            <li><a href="#courses">Courses</a></li>
-                            <li><a href="#global-curriculum">Global Curriculum</a></li>
-                            <li><a href="#teacher">Teacher</a></li>
-                            <li><a href="#inquiry-form">Book Demo</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            
-            <div style="display: flex; align-items: center;">
+            <div class="header-controls">
                 <button id="themeToggle" class="theme-toggle" aria-label="Toggle Dark Mode">
                     <i class="fas fa-sun"></i>
                 </button>
+
+                <!-- Explore Button Moved Here -->
+                <a href="#courses" class="header-explore-btn">
+                    <i class="far fa-compass" style="font-size: 1.1rem;"></i> 
+                    Explore
+                </a>
+
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1603,7 +1545,7 @@
                 <a href="#inquiry-form" class="btn btn-contrast">
                     <i class="fas fa-calendar-check"></i> Book a Free Demo
                 </a>
-                <a href="#courses" class="btn btn-secondary">Explore Courses</a>
+                <a href="#courses" class="btn btn-explore-hero">Explore Courses</a>
             </div>
 
         </div>
@@ -1613,6 +1555,7 @@
     <section class="mission-section" id="mission">
         <div class="container">
             <h2>Our Mission</h2>
+            <!-- First line removed as requested -->
             <p>Our mission is to make high-quality mathematics education accessible to students worldwide, combining strong academic standards with modern technology and a human-centered approach. We believe that every student has the potential to excel in mathematics with the right guidance, personalized attention, and a supportive learning environment.</p>
             <hr style="border: 0; border-top: 3px solid rgba(255,255,255,0.2); margin: 1.5rem 0;">
             <p>We proudly support students from international boards, CBSE, ICSE, ISC, IB, ensuring global standards with a personal touch. Our lessons are tailored to match individual learning paces.</p>
@@ -1624,6 +1567,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>What We Offer</h2>
+                <div class="section-subtitle">Comprehensive features designed for student success and parent peace of mind.</div>
             </div>
             <div class="features" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
                 <div class="feature-card">
@@ -1663,7 +1607,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Learning Experience & Offerings</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem;">A holistic approach combining personalized attention with rigorous academic standards.</p>
+                <p class="section-subtitle">A holistic approach combining personalized attention with rigorous academic standards.</p>
             </div>
             
             <div class="learning-grid">
@@ -1741,6 +1685,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Verified Reviews <span class="verified-badge"><i class="fas fa-check"></i></span></h2>
+                <div class="section-subtitle">Read what parents and students from around the globe say about us.</div>
             </div>
             
             <div class="reviews-container">
@@ -1784,7 +1729,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Courses</h2>
-                <p style="color: var(--text-muted);">Browse by Grade Level</p>
+                <div class="section-subtitle">Expertly designed modules catering to every academic level and requirement.</div>
             </div>
             
             <div class="grade-filter">
@@ -1829,6 +1774,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Our Expert Teacher</h2>
+                <div class="section-subtitle">Learn from an experienced mentor dedicated to your mathematical growth.</div>
             </div>
             <div class="teacher-profile">
                 <div class="teacher-photo-frame-large">
@@ -1862,31 +1808,34 @@
                 </div>
                 
                 <div class="form-content">
+                    <div class="form-note">Fields marked with <span class="required-star">*</span> are required</div>
                     <form id="demoBookingForm">
+                        <input type="hidden" name="access_key" value="d614a39c-1259-4dcd-b6a0-7c7a4f26a85f">
+                        
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                             <div class="form-group">
-                                <label class="form-label">Student Name *</label>
-                                <input type="text" id="studentName" class="form-control" required>
+                                <label class="form-label">Student Name <span class="required-star">*</span></label>
+                                <input type="text" id="studentName" name="studentName" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Parent Name *</label>
-                                <input type="text" id="parentName" class="form-control" required>
+                                <label class="form-label">Parent Name</label>
+                                <input type="text" id="parentName" name="parentName" class="form-control">
                             </div>
                         </div>
 
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
                             <div class="form-group">
-                                <label class="form-label">Email *</label>
-                                <input type="email" id="email" class="form-control" required>
+                                <label class="form-label">Email <span class="required-star">*</span></label>
+                                <input type="email" id="email" name="email" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">WhatsApp Number *</label>
-                                <input type="text" id="whatsapp" class="form-control" placeholder="+91..." required>
+                                <label class="form-label">WhatsApp Number <span class="required-star">*</span></label>
+                                <input type="text" id="whatsapp" name="whatsapp" class="form-control" placeholder="+91..." required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Curriculum Type *</label>
+                            <label class="form-label">Curriculum Type <span class="required-star">*</span></label>
                             <div class="curriculum-checkbox-grid">
                                 <label class="checkbox-label"><input type="checkbox" name="curriculum" value="CBSE"> CBSE</label>
                                 <label class="checkbox-label"><input type="checkbox" name="curriculum" value="ICSE"> ICSE</label>
@@ -1897,12 +1846,12 @@
                                 <label class="checkbox-label"><input type="checkbox" name="curriculum" value="Other" id="otherCurriculumCheckbox"> Other</label>
                             </div>
                             <div id="otherCurriculumInput" class="other-input">
-                                <input type="text" id="otherCurriculum" class="form-control" placeholder="Specify curriculum">
+                                <input type="text" id="otherCurriculum" name="otherCurriculum" class="form-control" placeholder="Specify curriculum">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label">Purpose of Learning *</label>
+                            <label class="form-label">Purpose of Learning <span class="required-star">*</span></label>
                             <div class="purpose-checkbox-grid">
                                 <label class="checkbox-label"><input type="checkbox" name="purpose" value="Academic Improvement"> Academic Improvement</label>
                                 <label class="checkbox-label"><input type="checkbox" name="purpose" value="Exam Prep"> Exam Prep</label>
@@ -1913,9 +1862,9 @@
 
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                             <div class="form-group">
-                                <label class="form-label">Grade Level *</label>
-                                <select id="grade" class="form-control" required>
-                                    <option value="">Select Grade</option>
+                                <label class="form-label">Grade Level</label>
+                                <select id="grade" name="grade" class="form-control">
+                                    <option value="">Select Grade (Optional)</option>
                                     <option value="Grade 3-5">Grade 3-5</option>
                                     <option value="Grade 6-8">Grade 6-8</option>
                                     <option value="Grade 9-10">Grade 9-10</option>
@@ -1924,8 +1873,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Country *</label>
-                                <select id="country" class="form-control" required>
+                                <label class="form-label">Country <span class="required-star">*</span></label>
+                                <select id="country" name="country" class="form-control" required>
                                     <option value="">Select Country</option>
                                     <option value="India">India</option>
                                     <option value="USA">USA</option>
@@ -1935,6 +1884,14 @@
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
+                        </div>
+                        
+                        <!-- New Payment Request Checkbox -->
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label class="checkbox-label" style="background: var(--icon-bg); border-color: var(--accent-blue);">
+                                <input type="checkbox" name="requestPaymentDetails" value="Yes"> 
+                                <span style="font-weight: 600; color: var(--text-heading);">Request Payment Details</span>
+                            </label>
                         </div>
 
                         <button type="submit" class="form-submit-btn">
@@ -1953,21 +1910,18 @@
                 <div class="footer-logo">
                     <div class="logo-main" style="margin-bottom: 1rem;">Math Meridian</div>
                     
-                    <div class="payment-methods">
-                        <span>We Accept:</span>
-                        <i class="fab fa-cc-visa payment-icon" title="Visa"></i>
-                        <i class="fab fa-cc-mastercard payment-icon" title="Mastercard"></i>
-                        <i class="fab fa-cc-paypal payment-icon" title="PayPal"></i>
-                        
-                        <!-- Replaced text spans with logos -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rupay-Logo.png/320px-Rupay-Logo.png" alt="RuPay" class="payment-logo" title="RuPay">
-                        <!-- Net Banking (Font Icon) -->
-                        <i class="fas fa-university payment-icon" title="Net Banking"></i>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/320px-UPI-Logo-vector.svg.png" alt="UPI" class="payment-logo" title="UPI">
+                    <div class="payment-section-footer">
+                        <span class="payment-label">We Accept:</span>
+                        <div class="payment-methods">
+                            <i class="fab fa-cc-visa payment-icon" title="Visa"></i>
+                            <i class="fab fa-cc-mastercard payment-icon" title="Mastercard"></i>
+                            <i class="fab fa-cc-paypal payment-icon" title="PayPal"></i>
+                            
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rupay-Logo.png/320px-Rupay-Logo.png" alt="RuPay" class="payment-logo" title="RuPay">
+                            <i class="fas fa-university payment-icon" title="Net Banking"></i>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/320px-UPI-Logo-vector.svg.png" alt="UPI" class="payment-logo" title="UPI">
+                        </div>
                     </div>
-                    <a href="mailto:mathmeridian26@gmail.com?subject=Payment Request – Online Classes" class="request-payment-btn" style="margin-top: 1.5rem; display: inline-block;">
-                        Request Payment Details
-                    </a>
                 </div>
                 
                 <div class="footer-links">
@@ -1989,8 +1943,8 @@
                     <h4>Contact Info</h4>
                     <a href="mailto:mathmeridian26@gmail.com"><i class="fas fa-envelope" style="width:20px"></i> mathmeridian26@gmail.com</a>
                     <a href="tel:+919609738421"><i class="fas fa-phone" style="width:20px"></i> +91 9609738421</a>
-                    <a href="#"><i class="fas fa-map-marker-alt" style="width:20px"></i> Saltlake Sector V, Kolkata, West Bengal, India</a>
-                    <a href="#"><i class="fas fa-clock" style="width:20px"></i> Mon-Sat, 9 AM – 9 PM IST</a>
+                    <a><i class="fas fa-map-marker-alt" style="width:20px"></i> Saltlake Sector V, Kolkata, West Bengal, India</a>
+                    <a><i class="fas fa-clock" style="width:20px"></i> Mon-Sat, 9 AM – 9 PM IST</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -2011,7 +1965,7 @@
     
     <div class="ai-window" id="aiWindow">
         <div class="ai-header">
-            <span><i class="fas fa-sparkles" style="color: #fbbf24; margin-right: 8px;"></i> SphereBot AI</span>
+            <span><i class="fas fa-sparkles" style="color: #fbbf24; margin-right: 8px;"></i> Meridian AI</span>
             <button id="closeAi" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">&times;</button>
         </div>
         <div class="ai-tabs">
@@ -2023,7 +1977,7 @@
         <div class="ai-content-area active" id="chatTab">
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">Hello! I'm SphereBot. Ask me any math question or doubt you have! 🧮</div>
+                    <div class="message bot">Hello! I'm Meridian AI. Ask me any math question or doubt you have! 🧮</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Ask a math question..." onkeypress="handleEnter(event)">
@@ -2068,6 +2022,7 @@
         const themeToggleBtn = document.getElementById('themeToggle');
         const themeIcon = themeToggleBtn.querySelector('i');
         const htmlElement = document.documentElement;
+        const logoImage = document.getElementById('siteLogo');
 
         // Check Local Storage or System Preference
         const currentTheme = localStorage.getItem('theme');
@@ -2075,31 +2030,39 @@
 
         if (currentTheme) {
             htmlElement.setAttribute('data-theme', currentTheme);
-            updateIcon(currentTheme);
+            updateThemeUI(currentTheme);
         } else if (systemPrefersDark) {
             htmlElement.setAttribute('data-theme', 'dark');
-            updateIcon('dark');
+            updateThemeUI('dark');
+        } else {
+            // Default Light
+            updateThemeUI('light');
         }
 
         themeToggleBtn.addEventListener('click', () => {
             const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
+            updateThemeUI(newTheme);
         });
 
-        function updateIcon(theme) {
+        function updateThemeUI(theme) {
+            // Update Icon
             if (theme === 'dark') {
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
+                // Update Logo for Dark Mode
+                logoImage.src = 'newlogo-dark.png';
             } else {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
+                // Update Logo for Light Mode
+                logoImage.src = 'newlogo-light.png';
             }
         }
 
         // Gemini API Configuration
-        const apiKey = ""; // API Key will be injected by the environment
+        const apiKey = "AIzaSyDTeHriynnymEPZ4d5MoROPcVN9mZZiwIY"; // API Key will be injected by the environment
 
         async function callGeminiAPI(prompt) {
             if (!apiKey) {
@@ -2158,7 +2121,7 @@
             messages.scrollTop = messages.scrollHeight;
             
             // AI Response
-            const systemPrompt = "You are SphereBot, a friendly and encouraging math tutor for school students. Keep answers concise, clear, and easy to understand. Use emojis occasionally. Answer this student's question: " + text;
+            const systemPrompt = "You are Meridian AI, a friendly and encouraging math tutor for school students. Keep answers concise, clear, and easy to understand. Use emojis occasionally. Answer this student's question: " + text;
             
             const responseText = await callGeminiAPI(systemPrompt);
             
@@ -2228,15 +2191,63 @@
 
         // --- Existing Code Below ---
 
-        // Data
+        // Data - UPDATED from uploaded images
         const coursesData = {
             all: [
-                { id: 1, title: "Primary Mathematics", grade: "primary", gradeDisplay: "Primary (Grades 3-5)", symbol: "🧮", description: "Foundational math skills for young learners.", features: ["Interactive games", "Basic concepts"] },
-                { id: 2, title: "Middle School Math", grade: "middle", gradeDisplay: "Middle (Grades 6-8)", symbol: "📐", description: "Algebra and geometry foundations.", features: ["Logic building", "Problem solving"] },
-                { id: 3, title: "High School Math", grade: "high", gradeDisplay: "High School (9-10)", symbol: "📊", description: "Board exam preparation and advanced concepts.", features: ["Mock tests", "Detailed analysis"] },
-                { id: 4, title: "Senior Secondary", grade: "senior", gradeDisplay: "Senior (11-12)", symbol: "∫", description: "Calculus, vectors, and competitive prep.", features: ["JEE/Entrance prep", "Advanced theory"] },
-                { id: 5, title: "UG Mathematics", grade: "ug", gradeDisplay: "Undergraduate", symbol: "∞", description: "University level advanced mathematics.", features: ["Real Analysis", "Abstract Algebra"] },
-                { id: 6, title: "Competitive Math", grade: "competitive", gradeDisplay: "Olympiad / Contest", symbol: "🏆", description: "Specialized training for math competitions.", features: ["IMO/AMC Prep", "Speed techniques"] }
+                { 
+                    id: 1, 
+                    title: "Primary Mathematics", 
+                    grade: "primary", 
+                    gradeDisplay: "Primary (Grades 3-5)", 
+                    symbol: "🧮", 
+                    description: "Foundational math skills for young learners, focusing on basic concepts through interactive and engaging methods.", 
+                    features: ["Live structured classes (1 hour duration)", "Interactive learning with visuals & games", "Basic concept reinforcement", "Fun math activities and puzzles"] 
+                },
+                { 
+                    id: 2, 
+                    title: "Middle School Mathematics", 
+                    grade: "middle", 
+                    gradeDisplay: "Middle School (Grades 6-8)", 
+                    symbol: "📐", 
+                    description: "Building on fundamentals with introduction to algebra, geometry, and advanced problem-solving techniques.", 
+                    features: ["Live structured classes (1 hour duration)", "Algebra and geometry foundations", "Problem-solving skill development", "Topic tests with detailed solutions"] 
+                },
+                { 
+                    id: 3, 
+                    title: "High School Mathematics", 
+                    grade: "high", 
+                    gradeDisplay: "High School (Grades 9-10)", 
+                    symbol: "📊", 
+                    description: "Comprehensive coverage of high school math curriculum with focus on exam preparation, competitive tests, and building advanced mathematical thinking.", 
+                    features: ["Live structured classes (1.5 hour duration)", "Advanced algebra and trigonometry", "Comprehensive problem-solving", "Mock tests with detailed solutions"] 
+                },
+                { 
+                    id: 4, 
+                    title: "Senior Secondary Mathematics", 
+                    grade: "senior", 
+                    gradeDisplay: "Senior Secondary (Grades 11-12)", 
+                    symbol: "∫", 
+                    description: "Advanced mathematics for board exams and competitive entrance test preparation.", 
+                    features: ["Live structured classes (1.5 hour duration)", "Calculus and advanced algebra", "Board exam focused preparation", "Competitive test strategies (JEE, etc.)"] 
+                },
+                { 
+                    id: 5, 
+                    title: "UG Mathematics", 
+                    grade: "ug", 
+                    gradeDisplay: "Undergraduate (Mathematics)", 
+                    symbol: "∞", 
+                    description: "University-level mathematics covering advanced topics for undergraduate students.", 
+                    features: ["Live structured classes (1.5 hour duration)", "Advanced calculus and linear algebra", "Real and complex analysis", "Abstract algebra topics"] 
+                },
+                { 
+                    id: 6, 
+                    title: "Competitive Mathematics Training", 
+                    grade: "competitive", 
+                    gradeDisplay: "Olympiad & International Contests", 
+                    symbol: "🏆", 
+                    description: "Specialized training for Olympiad, IMO Foundation, NTSE, AMC, and International Math Contests.", 
+                    features: ["Problem-solving mastery techniques", "Logical thinking development", "Speed & accuracy training", "Competition strategy sessions"] 
+                }
             ]
         };
         
@@ -2285,7 +2296,7 @@
             }
         }
 
-        // Functions
+        // Functions - Updated Course Loading for Image Design
         function loadCourses(grade) {
             const container = document.getElementById('coursesContainer');
             container.innerHTML = '';
@@ -2311,9 +2322,7 @@
                     </div>
                     <div class="course-body">
                         <p style="color: var(--text-muted); margin-bottom: 1rem;">${c.description}</p>
-                        <div class="course-features">
-                            <ul>${c.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}</ul>
-                        </div>
+                        <!-- Bullet points removed from main card, kept in modal -->
                         <button class="btn btn-secondary view-details" style="width:100%; margin-top:auto;" onclick="openModal(${c.id})">View Details</button>
                     </div>
                 `;
@@ -2340,7 +2349,14 @@
                     <ul style="list-style: none; margin-bottom: 2rem;">
                         ${c.features.map(f => `<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);"><i class="fas fa-check" style="color: var(--primary-green); margin-right: 10px;"></i> ${f}</li>`).join('')}
                     </ul>
-                    <a href="#inquiry-form" onclick="closeModal()" class="btn btn-primary" style="width: 100%; justify-content: center;">Book Free Demo for this Course</a>
+                    
+                    <!-- Contact Info Section -->
+                    <div style="background: var(--bg-section); padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-heading);"><i class="fas fa-gift" style="color: var(--primary-blue);"></i> Free Demo Session Available</h4>
+                        <p style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-phone-alt" style="color: var(--text-muted);"></i> +91 9609738421</p>
+                        <p style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="fas fa-envelope" style="color: var(--text-muted);"></i> victorchakraborty4@gmail.com</p>
+                        <a href="#inquiry-form" onclick="closeModal()" class="btn btn-primary" style="width: 100%; justify-content: center;">Book Free Demo Now</a>
+                    </div>
                 </div>
             `;
             modal.classList.add('active');
@@ -2357,14 +2373,18 @@
             if(type === 'terms') emoji = "❗ "; 
             if(type === 'refund') emoji = "💰 ";
             if(type === 'privacy') emoji = "🔐 ";
+
+            // Dynamic Logo Source
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const logoSrc = isDark ? 'newlogo-dark.png' : 'newlogo-light.png';
             
             content.innerHTML = `
                 <div class="modal-body" style="padding: 3rem;">
-                    <button class="close-modal" style="color: var(--text-heading); background: var(--bg-section);" onclick="closeModal()">&times;</button>
+                    <button class="close-modal" onclick="closeModal()">&times;</button>
                     
                     <div class="modal-logo">
-                        <div class="modal-logo-icon"></div>
-                        <div class="modal-logo-text">MathMeridian</div>
+                        <img src="${logoSrc}" alt="Math Meridian Logo">
+                        <div class="modal-logo-text">Math Meridian</div>
                     </div>
                     
                     <h2 style="color: var(--text-heading); margin-bottom: 1.5rem;">${emoji}${data.title}</h2>
@@ -2388,23 +2408,6 @@
             document.getElementById('navOverlay').addEventListener('click', () => {
                 document.getElementById('mobileNav').classList.remove('active');
                 document.getElementById('navOverlay').classList.remove('active');
-            });
-
-            // Explore Menu
-            document.getElementById('exploreBtn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                document.getElementById('exploreMenu').classList.toggle('active');
-            });
-            
-            document.addEventListener('click', () => {
-                document.getElementById('exploreMenu').classList.remove('active');
-            });
-
-            // Read More
-            document.getElementById('readMoreBtn').addEventListener('click', function() {
-                document.getElementById('hiddenText').classList.toggle('show');
-                const isShown = document.getElementById('hiddenText').classList.contains('show');
-                this.innerHTML = isShown ? 'Read Less <i class="fas fa-arrow-up"></i>' : 'Read Our Mission <i class="fas fa-arrow-down"></i>';
             });
 
             // Grade Filters
@@ -2432,10 +2435,54 @@
                 });
             }
 
-            // Form Submit
+            // Form Submit Logic (Updated for Web3Forms)
             document.getElementById('demoBookingForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                alert("Thank you! We will contact you on WhatsApp shortly.");
+                
+                // Manual Checkbox Validation
+                const curriculumChecked = document.querySelectorAll('input[name="curriculum"]:checked').length > 0;
+                const purposeChecked = document.querySelectorAll('input[name="purpose"]:checked').length > 0;
+                
+                if (!curriculumChecked) {
+                    alert("Please select at least one Curriculum Type.");
+                    return;
+                }
+                
+                if (!purposeChecked) {
+                    alert("Please select at least one Purpose of Learning.");
+                    return;
+                }
+
+                // If valid, show loading state
+                const submitBtn = this.querySelector('.form-submit-btn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+
+                // Send data using fetch
+                const formData = new FormData(this);
+                
+                fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Thank you! We have received your details and will contact you on WhatsApp shortly.");
+                        this.reset();
+                    } else {
+                        alert("Something went wrong. Please try again later.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("There was an error submitting the form. Please try again.");
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
             });
         }
         
